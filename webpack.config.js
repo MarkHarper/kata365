@@ -3,6 +3,7 @@ const Webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const Autoprefixer = require("autoprefixer");
+const path = require('path');
 
 const plugins = {
   production: [
@@ -16,7 +17,6 @@ const plugins = {
 module.exports = {
   entry: [
     "./web/static/js/index.js",
-    "./web/static/css/index.css",
   ],
   output: {
     path: "./priv/static",
@@ -32,6 +32,13 @@ module.exports = {
         plugins: ["transform-decorators-legacy"],
         presets: ["react", "es2015", "stage-2"],
       }
+    },
+    {
+      test: /\.css$/,
+      loaders: [
+          'style?sourceMap',
+          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+      ]
     }, {
       test: /\.png$/,
       loader: "url?" + [
@@ -76,17 +83,9 @@ module.exports = {
       ].join("&"),
     }],
   },
-  postcss: [
-    Autoprefixer({
-      browsers: ["last 2 versions"]
-    })
-  ],
   resolve: {
     extensions: ["", ".js", ".css"],
     modulesDirectories: ["node_modules", __dirname + "/web/static/js"],
-    alias: {
-      styles: __dirname + "/web/static/styles"
-    }
   },
   plugins: [
     // Important to keep React file size down
@@ -96,7 +95,6 @@ module.exports = {
       },
     }),
     new Webpack.optimize.DedupePlugin(),
-    new ExtractTextPlugin("css/app.css"),
     new CopyPlugin([{from: "./web/static/assets"}])
   ].concat(plugins[env])
 };
