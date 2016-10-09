@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 
 class Main extends React.Component {
   render() {
-    const { visitors } = this.props;
+    const { visitors } = this.props
     return <main>
       <span>{'Rewrite'}</span>
     </main>

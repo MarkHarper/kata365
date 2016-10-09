@@ -3,7 +3,7 @@ import { Editor } from './editor.js'
 import { Markdown } from './markdown.js'
 
 MarkdownEditor.propTypes = {
-  text: React.PropTypes.string,
+  text: PropTypes.string,
 }
 
 export default function MarkdownEditor (props) {
@@ -23,5 +23,5 @@ export default function MarkdownEditor (props) {
         <Markdown text={props.text} />
       </section>   
     </main>
-  );
+  )
 }

@@ -7,8 +7,8 @@ Editor.propTypes = {
 
 export default function Editor (props) {
   function handleEdit ({target}) {
-    const val = target.value;
-    props.onEdit(val);
+    const val = target.value
+    props.onEdit(val)
   }
   return (
     <textarea onInput={this.handleEdit}>
